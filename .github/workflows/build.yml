@@ -1,23 +1,23 @@
-yaml
-name: Bandit Security Check
+name: Security Scan
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   security_scan:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v2
       with:
-        python-version: '3.x'  # Specify your Python version here
+        python-version: '3.x'  # Choose the desired Python version
 
-    - name: Install Bandit and Dependencies
+    - name: Install Bandit
       run: |
-        python -m pip install bandit[toml]
-        # Add any additional dependencies if needed
-
- 
+        pip install bandit
