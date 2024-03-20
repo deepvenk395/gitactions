@@ -21,3 +21,8 @@ jobs:
     - name: Install Bandit
       run: |
         pip install bandit
+
+    - name: Run Bandit
+      run: |
+        # Run Bandit on your codebase
+        bandit -r .
