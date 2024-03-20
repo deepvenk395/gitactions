@@ -1,6 +1,9 @@
-name: Hello World
+name: Build and Test
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   build:
@@ -9,7 +12,12 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-      
+
+    - name: Use Node.js 16.x
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16.x'
+
     - name: Install dependencies
       run: npm install
 
@@ -18,3 +26,4 @@ jobs:
 
     - name: Test
       run: npm test
+
