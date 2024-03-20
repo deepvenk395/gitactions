@@ -1,29 +1,23 @@
-name: Build and Test
+yaml
+name: Bandit Security Check
 
-on:
-  push:
-    branches:
-      - master
+on: [push, pull_request]
 
 jobs:
-  build:
+  security_scan:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
-    - name: Use Node.js 16.x
-      uses: actions/setup-node@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
       with:
-        node-version: '16.x'
+        python-version: '3.x'  # Specify your Python version here
 
-    - name: Install dependencies
-      run: npm install
+    - name: Install Bandit and Dependencies
+      run: |
+        python -m pip install bandit[toml]
+        # Add any additional dependencies if needed
 
-    - name: Build
-      run: npm run build
-
-    - name: Test
-      run: npm test
-
+ 
