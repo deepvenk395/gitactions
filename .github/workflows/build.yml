@@ -1,22 +1,28 @@
-name: Bandit Scan
+name: Security Scan
 
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   security_scan:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
+    - name: Checkout code
       uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'  # Choose the desired Python version
 
     - name: Install Bandit
       run: |
-        pip install bandit
+        python -m pip install bandit
 
     - name: Run Bandit
       run: |
+        # Run Bandit on your codebase
         bandit -r .
